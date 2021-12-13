@@ -30,7 +30,7 @@ Good Code, Bad Code - Think like a software engineer (BY Tom Long)
 
 **4. Make Code Modular**
 
-- Modularity = object/system is composed of smaller components that can be independently exchanged or replaced (easily reconfigured)
+- **Modularity** = object/system is composed of smaller components that can be independently exchanged or replaced (easily reconfigured)
 - Beneficial to break a piece of code down into self-contained modules, where interactions between 2 adjacent modules happen in a single place and user a well-defined interface --> ensures the code will be easier to adapt to changing requirmeents (changing 1 thing doesn't require lots of change all over the place)
 - Modular systems are easier to comprehend and reason about since functionality is broken into manageable chunks and interactions between chunks are well defined and documented --> increases chance that code will work
 
@@ -46,7 +46,44 @@ Good Code, Bad Code - Think like a software engineer (BY Tom Long)
   | ----------- | ----------- | ----------- |
   | Tests small units of code - ex. individual functions or classes (most commonly used) | Tests the integration of multiple components, modules and subsystems | Tests typical journey/workflow through a whole sofware system from start to finish |
 
+- **Testability** = describes how well that code lends itself to being tested --> more modular code/systems are more testable
+- Test-Driven Development: tests being written before the code
+
 ## 2. Layers of abstraction
+
+- `null`: a value/reference/pointer being absent
+  | Null is useful | Null is problematic |
+  | ----------- | ----------- |
+  | Concept of something being absent very often occurs | Not always obvious when a value can/cannot be null |
+
+- **Null Safety/Void safety**: ensures that any variables/return values that can be null are marked as such and the compiler enforces that they are not used without first checking that they are not null
+
+```c++
+// SUPPORTS NULL SAFETY
+
+// ? means that the return type can be null
+Element? getFifthElement(List<Element> elements) {
+  if (elements.size() < 5) {
+    // null is returned when the value cannot be obtained
+    return null;
+  }
+  return elements[4];
+}
+```
+
+```c++
+// DOESN'T SUPPORT NULL SAFETY
+
+// Return type is an Optional Element
+Optional<Element> getFifthElement(List<Element> elements) {
+  if (elements.size() < 5) {
+    return Optional.empty(); // Optional.empty() instead of null
+  }
+  return Optional.of(elements[4]);
+}
+```
+
+Q. Why create layers of abstraction?
 
 ## 3. Other engineers and code contracts
 
